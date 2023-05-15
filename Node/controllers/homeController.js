@@ -7,7 +7,6 @@ export const Index = (req,res) => {
     res.send({context: "Home"});
 }
 
-
 export const register = async (req,res) => {
     try{
         let password = await bcrypt.hash(req.body.password,10)
@@ -17,6 +16,7 @@ export const register = async (req,res) => {
             email: req.body.email,
             password: password
         });
+        
         res.send();
         
     }
@@ -30,9 +30,8 @@ export const register = async (req,res) => {
 export const teacherLogin = async (req,res) => {
     
     const data = await Teacher.findOne({ where: { email: req.body.email }, raw: true  });
-
-    const compare = bcrypt.compare(req.body.password, data.password)
-    if(compare){
+  
+    if(bcrypt.compare(req.body.password, data.password)){
         const token = jwt.sign(
             {
                 id:data.id,
@@ -55,7 +54,7 @@ export const studentLogin = async (req,res) => {
     
     const data = await Student.findOne({ where: { rollNo: req.body.rollNo }, raw: true  });
 
-    if(compare){
+    if(new Date(data.dob) == new Date(req.body.dob)){
         const token = jwt.sign(
             {
                 id:data.id,

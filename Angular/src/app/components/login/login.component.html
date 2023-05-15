@@ -1,0 +1,101 @@
+<div class="container">
+
+    <!-- Highlight Card -->
+    <mat-card class="card card-big">
+      <mat-tab-group>
+
+        <mat-tab label="Student">
+
+          <form [formGroup]="studentLoginForm" (ngSubmit)="studentLogin()"  class="login-form">
+
+            <div class="form-container">
+              <div>
+
+                <div class="errors" *ngIf="!studentLoginForm.get('rollNo')?.errors?.['required'] && studentLoginForm.get('rollNo')?.errors">
+                  Please enter a valid Roll no
+                </div>
+                <div  class="errors" *ngIf="studentLoginForm.get('rollNo')?.invalid && (studentLoginForm.get('rollNo')?.dirty || studentLoginForm.get('rollNo')?.touched) && studentLoginForm.get('rollNo')?.errors?.['required']">
+                  Roll no is required
+                </div>
+               
+              <mat-form-field class="fields">
+                  <mat-label>
+                    Roll No
+                  </mat-label>
+                  <input type="number" formControlName="rollNo"  matInput placeholder="Roll No" >
+                </mat-form-field>
+              </div>
+  
+              <div>
+
+                <div class="errors" *ngIf="!studentLoginForm.get('dob')?.errors?.['required'] && studentLoginForm.get('dob')?.errors">
+                  Please enter a valid DOB
+                </div>
+                <div  class="errors" *ngIf="studentLoginForm.get('dob')?.invalid && (studentLoginForm.get('dob')?.dirty || studentLoginForm.get('dob')?.touched) && studentLoginForm.get('dob')?.errors?.['required']">
+                  DOB is required
+                </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>DOB</mat-label>
+                  <input matInput formControlName="dob" [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              
+            </div>
+
+            <div class="login-form">
+              <button [disabled]="!studentLoginForm.valid" type="submit" mat-raised-button color="primary">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="login"> </mat-icon>Login
+              </button>
+            </div>
+          </form>
+
+
+        </mat-tab>
+
+        <mat-tab label="Teacher"> 
+
+
+          <form [formGroup]="teacherLoginForm" (ngSubmit)="teacherLogin()" class="login-form">
+
+            <div class="form-container">
+              <div>
+                
+                <div class="error" *ngIf="!teacherLoginForm.get('email')?.errors?.['required'] && teacherLoginForm.get('email')?.errors">
+                  Please enter a valid email address
+                </div>
+                <div class="error" *ngIf="teacherLoginForm.get('email')?.invalid && (teacherLoginForm.get('email')?.dirty || teacherLoginForm.get('email')?.touched) && teacherLoginForm.get('email')?.errors?.['required']">
+                  Email is required
+                </div>
+                <mat-form-field class="fields">
+                  <mat-label>Email</mat-label>
+                  <input formControlName="email" matInput placeholder="Email" >
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field class="fields">
+                  <mat-label>Password</mat-label>
+                  <input  formControlName="password" matInput placeholder="Password">
+                </mat-form-field>
+              </div>
+              
+            </div>
+
+            <div class="login-form">
+              <button  [disabled]="!teacherLoginForm.valid" mat-raised-button color="primary">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="login"> </mat-icon>Login
+              </button>
+            </div>
+          </form>
+
+
+
+        </mat-tab>
+        
+      </mat-tab-group>
+    </mat-card>
+</div>

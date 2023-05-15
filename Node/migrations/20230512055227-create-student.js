@@ -16,6 +16,7 @@ module.exports = {
       rollno: {
         allowNull: false,
         type: Sequelize.STRING,
+        unique: true
       },
       teacherId: {
         allowNull: false,
