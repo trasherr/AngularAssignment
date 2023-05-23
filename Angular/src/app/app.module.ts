@@ -9,13 +9,17 @@ import { TeacherLayoutComponent } from './components/layouts/teacher-layout/teac
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StudentLayoutComponent } from './components/layouts/student-layout/student-layout.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TeacherLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    StudentLayoutComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

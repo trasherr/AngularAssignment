@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-
+import {catchError, map} from 'rxjs/operators'; 
 
 interface ILoginResponse{
   access_token: string
@@ -68,18 +68,18 @@ export class LoginComponent {
 
     this.http.post<ILoginResponse>(environment.BASE_URL+'/account/teacher', JSON.stringify(teacher), {
       headers: headers
-    }).subscribe(result => {
+    })
+    //.pipe(
+    //   catchError((err: HttpErrorResponse) => {
+    //     if(err.status===404){
+    //       return Observable
+    //     }
+    //   }))
+    .subscribe(result => {
       console.log(result);
       localStorage.setItem("TYPE","teacher");
       localStorage.setItem("TOKEN",result.access_token);
       this.router.navigate(['/teacher']);
-    },
-    (error: HttpErrorResponse) => {
-      if(error.status == 419){
-        console.log("authentication failed");
-      }
-      console.log(error);
-      
     });
   }
 
