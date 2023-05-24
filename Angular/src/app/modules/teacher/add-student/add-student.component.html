@@ -1,0 +1,76 @@
+<mat-spinner *ngIf="isSubmitted" class="spinner"></mat-spinner>
+
+<mat-grid-list rowHeight="90vh"  cols="12">
+    <mat-grid-tile rowspan="1" colspan="8">
+        <img class="form-img" src="./assets/images/Checklist.png" alt="" srcset="">
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="1" colspan="4" >
+        <form #form="ngForm" [formGroup]="addRecordForm" (ngSubmit)="addRecord()" class="fields">
+            <div class="fields">
+                
+                <div class="errors" *ngIf="!addRecordForm.get('rollNo')?.errors?.['required'] && addRecordForm.get('rollNo')?.errors">
+                    Please enter a valid Roll no
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('rollNo')?.invalid && (addRecordForm.get('rollNo')?.dirty || addRecordForm.get('rollNo')?.touched) && addRecordForm.get('rollNo')?.errors?.['required']">
+                    Roll no is required
+                  </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>Roll No</mat-label>
+                  <input formControlName="rollNo" type="number" matInput>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <div class="errors" *ngIf="!addRecordForm.get('name')?.errors?.['required'] && addRecordForm.get('name')?.errors">
+                    Please enter a valid Name
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('name')?.invalid && (addRecordForm.get('name')?.dirty || addRecordForm.get('name')?.touched) && addRecordForm.get('name')?.errors?.['required']">
+                    Name is required
+                  </div>
+                <mat-form-field class="fields">
+                  <mat-label>Name</mat-label>
+                  <input formControlName="name" matInput>
+                </mat-form-field>
+            </div>
+
+            <div>
+
+                <div class="errors" *ngIf="!addRecordForm.get('dob')?.errors?.['required'] && addRecordForm.get('dob')?.errors">
+                  Please enter a valid DOB
+                </div>
+                <div  class="errors" *ngIf="addRecordForm.get('dob')?.invalid && (addRecordForm.get('dob')?.dirty || addRecordForm.get('dob')?.touched) && addRecordForm.get('dob')?.errors?.['required']">
+                  DOB is required
+                </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>DOB</mat-label>
+                  <input matInput formControlName="dob" [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+             
+              
+            </div>
+
+            <div>
+                <div class="errors" *ngIf="!addRecordForm.get('score')?.errors?.['required'] && addRecordForm.get('score')?.errors">
+                    Please enter a valid Score
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('score')?.invalid && (addRecordForm.get('score')?.dirty || addRecordForm.get('score')?.touched) && addRecordForm.get('score')?.errors?.['required']">
+                    Score is required
+                  </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>Score</mat-label>
+                  <input formControlName="score"  type="number" matInput>
+                </mat-form-field>
+            </div>
+
+            <button [disabled]="!addRecordForm.valid || isSubmitted"  mat-raised-button color="primary">
+                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="playlist_add"> </mat-icon>Add Record
+            </button>
+        </form>
+    </mat-grid-tile>
+  </mat-grid-list>

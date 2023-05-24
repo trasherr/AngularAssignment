@@ -61,10 +61,16 @@
   margin: 5px
 }
 
-.side-bar-card:hover{
+// .side-bar-card:hover{
   
-  // background: radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%);
-  border: 5px solid ;
-  border-image: linear-gradient(45deg, rgb(236, 158, 248), rgb(131, 83, 241));
+//   // background: radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%);
+//   border: 5px solid ;
+//   border-image: linear-gradient(45deg, rgb(236, 158, 248), rgb(131, 83, 241));
 
+// }
+
+.selected {
+  color: #eee;
+  background:radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%) ;
+  border-radius: 10px;
 }

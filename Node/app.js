@@ -12,6 +12,10 @@ import TeacherRoute from './routes/teacherRoute.js';
 import StudentRoute from './routes/studentRoute.js';
 // Routes =======================================
 
+// MiddleWare =======================================
+import teacherAuth from './controllers/middleware/teacherAuth.js';
+// MiddleWare =======================================
+
 const PORT = process.env.PORT || 5555;
 let app = express();
 
@@ -23,7 +27,7 @@ app.use(cors());
 app.use(express.static('public')); 
 
 app.use('/api',HomeRoute);
-app.use('/api/teacher',TeacherRoute);
+app.use('/api/teacher',teacherAuth ,TeacherRoute);
 app.use('/api/student',StudentRoute);
 
 

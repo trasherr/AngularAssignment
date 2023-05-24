@@ -27,12 +27,16 @@
         <img src="./assets/images/logo.svg" alt="logo" class="side-bar-logo"> <span class="side-bar-heading"> Angular</span>
       </div>
 
+      
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher' ?  'selected' : ''  }}" routerLink="/teacher" >
+        Student List 
+      </div>
 
-      <div class="side-bar-card text-center lh-lg ">
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/add-student' ?  'selected' : ''  }}" routerLink="/teacher/add-student">
         Add Record 
       </div>
 
-      <div class="side-bar-card text-center lh-lg ">
+      <div class="side-bar-card text-center lh-lg " routerLink="/logout">
         
           
             <mat-icon>logout</mat-icon> 

@@ -29,15 +29,16 @@ export const register = async (req,res) => {
 
 export const teacherLogin = async (req,res) => {
     
-    const data = await Teacher.findOne({ where: { email: req.body.email }, raw: true  });
-  
-    if(bcrypt.compare(req.body.password, data.password)){
+    const data = await Teacher.scope('withPassword').findOne({ where: { email: req.body.email }, raw: true });
+    const compare = await bcrypt.compare(req.body.password, data.password);
+    console.log(process.env.ACCESS_TOKEN);
+    if(compare){
         const token = jwt.sign(
             {
                 id:data.id,
                 email: data.email
             },
-            "access_token",
+            process.env.ACCESS_TOKEN,
             {
                 expiresIn: "24h"
             }

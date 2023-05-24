@@ -1,11 +1,11 @@
 import express  from "express";
-import { addStudentRecord, destroyStudentRecord, getAllStudents, updateProfile, updateStudentRecord } from "../controllers/teacherController.js";
+import { CreateStudentRecord, destroyStudentRecord, getAllStudents, updateProfile, updateStudentRecord } from "../controllers/teacherController.js";
 
 const TeacherRoute = express.Router();
 
 TeacherRoute.get('/getAllStudents', getAllStudents );
 TeacherRoute.put('/updateProfile', updateProfile );
-TeacherRoute.post('/addStudentRecord', addStudentRecord );
+TeacherRoute.post('/CreateStudentRecord', CreateStudentRecord );
 TeacherRoute.delete('/destroyStudentRecord', destroyStudentRecord );
 TeacherRoute.put('/updateStudentRecord', updateStudentRecord );
 

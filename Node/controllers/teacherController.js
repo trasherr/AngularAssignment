@@ -18,15 +18,17 @@ export const updateProfile = (req,res) => {
 }
 
 export const getAllStudents = async (req,res) => {
-    const data = await Student.findAll({ where:{ teacherId: req.body.identity } });
+    req.query.size = req.query.size ? Number(req.query.size) : 10;
+    const offset = req.query.page * req.query.size 
+    const data = await Student.findAll({ where:{ teacherId: req.body.identity }, limit: req.query.size, offset: offset });
     res.send(data);
 }
 
-export const addStudentRecord = async (req,res) => {
+export const CreateStudentRecord = async (req,res) => {
 
-    const unique = await Student.findOne({ where: { teacherId: req.bodt.identity, rollNo: req.body.rollNo }, raw: true });
+    const unique = await Student.findOne({ where: { teacherId: req.body.identity, rollNo: req.body.rollNo }, raw: true });
 
-    if(unique){
+    if(!unique){
         Student.create({
             name: req.body.name,
             rollNo: req.body.rollNo,
