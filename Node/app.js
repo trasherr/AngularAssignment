@@ -14,6 +14,7 @@ import StudentRoute from './routes/studentRoute.js';
 
 // MiddleWare =======================================
 import teacherAuth from './controllers/middleware/teacherAuth.js';
+import studentAuth from './controllers/middleware/studentAuth.js';
 // MiddleWare =======================================
 
 const PORT = process.env.PORT || 5555;
@@ -28,7 +29,7 @@ app.use(express.static('public'));
 
 app.use('/api',HomeRoute);
 app.use('/api/teacher',teacherAuth ,TeacherRoute);
-app.use('/api/student',StudentRoute);
+app.use('/api/student', studentAuth,StudentRoute);
 
 
 app.listen(PORT,() => {

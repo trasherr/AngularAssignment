@@ -14,7 +14,6 @@ const routes: Routes = [
 
   { path:'teacher', component: TeacherLayoutComponent, children:[
       { path: "",  loadChildren: () => import("./modules/teacher/teacher.module").then(m => m.TeacherModule) },
-    
     ],
     canActivate:[ TeacherGuardGuard]
   },

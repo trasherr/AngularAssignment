@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IStudent } from 'src/app/Interfaces/IStudent.interface';
+import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
 
@@ -16,7 +17,7 @@ export class AddStudentComponent {
   isSubmitted: boolean = false;
   @ViewChild('form') form : any;
   
-  constructor(private fb: FormBuilder,private http: HttpClient){
+  constructor(private fb: FormBuilder,private http: HttpClient,private loaderService: LoaderService){
      
     this.addRecordForm = this.fb.group({
       rollNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -27,6 +28,7 @@ export class AddStudentComponent {
   }
 
   addRecord(){
+    this.loaderService.load(true);
     this.isSubmitted = true;
     const token = localStorage.getItem("TOKEN");
     const headers = new HttpHeaders().set('Content-Type', 'application/json').append("authentication", token ? token : ""  );
@@ -44,6 +46,7 @@ export class AddStudentComponent {
     this.http.post<IStudent>(environment.BASE_URL+'/teacher/CreateStudentRecord', JSON.stringify(student), {
       headers: headers
     }).subscribe(result => {
+      this.loaderService.load(false);
 
       this.isSubmitted = false;
       Swal.fire('Student Added', 'You submitted succesfully!', 'success')  
@@ -52,6 +55,7 @@ export class AddStudentComponent {
     },
     (error: HttpErrorResponse) => {
       this.isSubmitted = false;
+      this.loaderService.load(false);
 
       if(error.status == 419){
         console.log("authentication failed");

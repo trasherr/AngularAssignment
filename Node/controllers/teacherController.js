@@ -53,7 +53,7 @@ export const updateStudentRecord = (req,res) => {
         score: req.body.score,
         dob: new Date(req.body.dob)
     },{
-        where: { teacherId: req.body.identity, rollNo: req.body.rollNo }
+        where: { teacherId: req.body.identity, id: req.params.studentId }
     }).then((student) => {
         res.send()
     }).catch(err => {
@@ -64,6 +64,6 @@ export const updateStudentRecord = (req,res) => {
 
 export const destroyStudentRecord = async (req,res) => {
 
-    await Student.destroy({ where: { teacherId: req.body.identity, rollNo: req.body.rollNo } });
+    await Student.destroy({ where: { teacherId: req.body.identity, id: req.params.studentId } });
     res.send();
 }

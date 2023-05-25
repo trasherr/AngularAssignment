@@ -53,15 +53,15 @@ export const teacherLogin = async (req,res) => {
 
 export const studentLogin = async (req,res) => {
     
-    const data = await Student.findOne({ where: { rollNo: req.body.rollNo }, raw: true  });
-
-    if(new Date(data.dob) == new Date(req.body.dob)){
+    const data = await Student.findOne({ where: { rollNo: req.body.rollNo, dob: new Date(req.body.dob) }, raw: true  });
+    
+    if(data){
         const token = jwt.sign(
             {
                 id:data.id,
                 rollNo: data.rollNo
             },
-            "access_token",
+            process.env.ACCESS_TOKEN,
             {
                 expiresIn: "2h"
             }

@@ -38,7 +38,7 @@ export class LoginComponent {
 
     const student = {
       rollNo: this.studentLoginForm.get("rollNo").value,
-      dob: this.studentLoginForm.get("dob").value
+      dob: new Date(this.studentLoginForm.get("dob").value)
     };
 
     this.http.post<ILoginResponse>(environment.BASE_URL+'/account/student', JSON.stringify(student), {
