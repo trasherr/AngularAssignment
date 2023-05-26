@@ -1,6 +1,6 @@
 .page-container{
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     color: #eee;
     background: radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%);
 
@@ -13,38 +13,46 @@
     width: 60%;
     border-radius: 25px;
     max-width: 100rem;
-    height: 50%;
-    max-width: 100rem;
-    padding: 5rem;
+    height:fit-content;
+    // min-height: 30rem;
+    max-width: 100%;
+    min-width: 25rem;
+    // padding: 5rem;
     background-color:#eee ;
     
 }
 
-.login-form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+// .login-form{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+   
+// }
 .form-container{
-    margin-top: 2rem;
-    
+    // margin-top: 2rem;
+    width: 100%
 }
 
-.fields {
+
+mat-form-field {
+    width: 100%;
     border-radius: 50px;
-    width: 50rem;   
-}
+
+  }
 input{
     border-radius: 50px;
 }
 
 button{
     border-radius: 50px;
-    padding-left: 2rem;
-    padding-right: 2rem;
 }
 
 .errors{
     color: red;
+
+}
+
+img{
+   
+    height: 100%;
 }

@@ -6,91 +6,111 @@
 
         <mat-tab label="Student">
 
-          <form [formGroup]="studentLoginForm" (ngSubmit)="studentLogin()"  class="login-form">
-
-            <div class="form-container">
-              <div>
-
-                <div class="errors" *ngIf="!studentLoginForm.get('rollNo')?.errors?.['required'] && studentLoginForm.get('rollNo')?.errors">
-                  Please enter a valid Roll no
-                </div>
-                <div  class="errors" *ngIf="studentLoginForm.get('rollNo')?.invalid && (studentLoginForm.get('rollNo')?.dirty || studentLoginForm.get('rollNo')?.touched) && studentLoginForm.get('rollNo')?.errors?.['required']">
-                  Roll no is required
-                </div>
+          <mat-grid-list  cols="2" rows="1">
+            <mat-grid-tile>
+              <img src="./assets/images/student-ai.png" alt="">
                
-              <mat-form-field class="fields">
-                  <mat-label>
-                    Roll No
-                  </mat-label>
-                  <input type="number" formControlName="rollNo"  matInput >
-                </mat-form-field>
-              </div>
-  
-              <div>
+            </mat-grid-tile>
+            <mat-grid-tile>
 
-                <div class="errors" *ngIf="!studentLoginForm.get('dob')?.errors?.['required'] && studentLoginForm.get('dob')?.errors">
-                  Please enter a valid DOB
+              <form [formGroup]="studentLoginForm" (ngSubmit)="studentLogin()" >
+    
+                <div class="form-container">
+                  
+    
+                  <span class="errors" *ngIf="!studentLoginForm.get('rollNo')?.errors?.['required'] && studentLoginForm.get('rollNo')?.errors">
+                    Please enter a valid Roll no
+                  </span>
+                  <span  class="errors" *ngIf="studentLoginForm.get('rollNo')?.invalid && (studentLoginForm.get('rollNo')?.dirty || studentLoginForm.get('rollNo')?.touched) && studentLoginForm.get('rollNo')?.errors?.['required']">
+                    Roll no is required
+                  </span>
+                   
+                  <mat-form-field >
+                    <mat-label>
+                      Roll No
+                    </mat-label>
+                    <input type="number" formControlName="rollNo"  matInput >
+                  </mat-form-field>
+                  
+      
+                
+    
+                  <span class="errors" *ngIf="!studentLoginForm.get('dob')?.errors?.['required'] && studentLoginForm.get('dob')?.errors">
+                    Please enter a valid DOB
+                  </span>
+                  <span  class="errors" *ngIf="studentLoginForm.get('dob')?.invalid && (studentLoginForm.get('dob')?.dirty || studentLoginForm.get('dob')?.touched) && studentLoginForm.get('dob')?.errors?.['required']">
+                    DOB is required
+                  </span>
+    
+                  <mat-form-field >
+                    <mat-label>DOB</mat-label>
+                    <input matInput formControlName="dob" [matDatepicker]="picker">
+                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  
+                  
+                  <button [disabled]="!studentLoginForm.valid" type="submit" mat-raised-button color="primary">
+                    <mat-icon aria-hidden="false" aria-label="Login" fontIcon="login"> </mat-icon>Login
+                  </button>
+                  
                 </div>
-                <div  class="errors" *ngIf="studentLoginForm.get('dob')?.invalid && (studentLoginForm.get('dob')?.dirty || studentLoginForm.get('dob')?.touched) && studentLoginForm.get('dob')?.errors?.['required']">
-                  DOB is required
-                </div>
+              </form>
+            </mat-grid-tile>
+           
+          </mat-grid-list>
 
-                <mat-form-field class="fields">
-                  <mat-label>DOB</mat-label>
-                  <input matInput formControlName="dob" [matDatepicker]="picker">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              
-            </div>
-
-            <div class="login-form">
-              <button [disabled]="!studentLoginForm.valid" type="submit" mat-raised-button color="primary">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="login"> </mat-icon>Login
-              </button>
-            </div>
-          </form>
 
 
         </mat-tab>
 
         <mat-tab label="Teacher"> 
 
+          <mat-grid-list cols="2" rows="1">
+            <mat-grid-tile>
+               <img src="./assets/images/teacher-ai.png" alt="">
+            </mat-grid-tile>
+            <mat-grid-tile>
 
-          <form [formGroup]="teacherLoginForm" (ngSubmit)="teacherLogin()" class="login-form">
-
-            <div class="form-container">
-              <div>
+              <form [formGroup]="teacherLoginForm" (ngSubmit)="teacherLogin()">
+    
+                <div class="form-container">
+                 
+                    
+                  <span class="errors" *ngIf="!teacherLoginForm.get('email')?.errors?.['required'] && teacherLoginForm.get('email')?.errors">
+                    Please enter a valid email address
+                  </span>
+                  <span class="errors" *ngIf="teacherLoginForm.get('email')?.invalid && (teacherLoginForm.get('email')?.dirty || teacherLoginForm.get('email')?.touched) && teacherLoginForm.get('email')?.errors?.['required']">
+                    Email is required
+                  </span>
+                  <mat-form-field >
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput >
+                  </mat-form-field>
                 
-                <div class="error" *ngIf="!teacherLoginForm.get('email')?.errors?.['required'] && teacherLoginForm.get('email')?.errors">
-                  Please enter a valid email address
-                </div>
-                <div class="error" *ngIf="teacherLoginForm.get('email')?.invalid && (teacherLoginForm.get('email')?.dirty || teacherLoginForm.get('email')?.touched) && teacherLoginForm.get('email')?.errors?.['required']">
-                  Email is required
-                </div>
-                <mat-form-field class="fields">
-                  <mat-label>Email</mat-label>
-                  <input formControlName="email" matInput >
-                </mat-form-field>
-              </div>
+                  <span class="errors" *ngIf="!teacherLoginForm.get('password')?.errors?.['required'] && teacherLoginForm.get('password')?.errors">
+                    Please enter a valid password
+                  </span>
+                  <span class="errors" *ngIf="teacherLoginForm.get('password')?.invalid && (teacherLoginForm.get('password')?.dirty || teacherLoginForm.get('password')?.touched) && teacherLoginForm.get('password')?.errors?.['required']">
+                    Password is required
+                  </span>
+                  
+                  <mat-form-field >
+                    <mat-label>Password</mat-label>
+                    <input  formControlName="password" type="password" matInput>
+                  </mat-form-field>
   
-              <div>
-                <mat-form-field class="fields">
-                  <mat-label>Password</mat-label>
-                  <input  formControlName="password" matInput>
-                </mat-form-field>
-              </div>
-              
-            </div>
+                    <button  [disabled]="!teacherLoginForm.valid" mat-raised-button color="primary">
+                      <mat-icon aria-hidden="false" aria-label="Login" fontIcon="login"> </mat-icon>Login
+                    </button>
+                
+                </div>
+    
+              </form>
+            </mat-grid-tile>
+          </mat-grid-list>
 
-            <div class="login-form">
-              <button  [disabled]="!teacherLoginForm.valid" mat-raised-button color="primary">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="login"> </mat-icon>Login
-              </button>
-            </div>
-          </form>
 
 
 
