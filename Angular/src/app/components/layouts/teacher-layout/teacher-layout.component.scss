@@ -3,9 +3,11 @@
     flex: 1 1 auto;
 }
 
+$backgroundgradient: linear-gradient(0deg, rgba(212,117,105,1) 0%, rgba(103,58,183,1) 100%);
+
 .side-bar-border{
 
-  background: radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%);
+  background: $backgroundgradient;
   width: 15rem;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -61,16 +63,19 @@
   margin: 5px
 }
 
-// .side-bar-card:hover{
-  
-//   // background: radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%);
-//   border: 5px solid ;
-//   border-image: linear-gradient(45deg, rgb(236, 158, 248), rgb(131, 83, 241));
-
-// }
-
 .selected {
   color: #eee;
-  background:radial-gradient(circle at 10% 20%, rgb(236, 158, 248) 0%, rgb(131, 83, 241) 90.1%) ;
+  background-color: #673ab7;
   border-radius: 10px;
+}
+
+.primary{
+  
+    background-color: #673ab7;
+    color: #eee;
+    box-shadow: 0 0 8px;
+}
+
+.option{
+  cursor: pointer;
 }

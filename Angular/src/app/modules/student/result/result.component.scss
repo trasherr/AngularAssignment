@@ -3,5 +3,16 @@ mat-card-header{
 }
 
 img{
+    height: 100%;
+    width: 100%;
     max-height: 50vh;
+    max-width: 50vh;
+}
+
+h1{
+    font-weight: 600;
+}
+
+mat-card-header{
+    font-weight: 500;
 }

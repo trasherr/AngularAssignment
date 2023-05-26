@@ -1,119 +1,123 @@
+<div class="container">
 
-<div #studentsTable >
-  <table id="students-table" mat-table [dataSource]="students" class="mat-elevation-z8">
+
+  <div #studentsTable >
+    <table id="students-table" mat-table [dataSource]="students" class="mat-elevation-z8">
+    
+      <!-- Position Column -->
   
-    <!-- Position Column -->
-
-    <ng-container matColumnDef="rollNo">
-      <th mat-header-cell *matHeaderCellDef> Roll No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.rollNo}} </td>
-    </ng-container>
+      <ng-container matColumnDef="rollNo">
+        <th mat-header-cell *matHeaderCellDef> Roll No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.rollNo}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> 
   
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> 
-
-        <div *ngIf="!editStudent[element.id]">
-          {{element.name}} 
-        </div>
-
-        <div *ngIf="editStudent[element.id]">
-          <div class="errors" *ngIf="!editStudent[element.id].name.errors?.['required'] && editStudent[element.id].name?.errors">
-            Please enter a valid Name
+          <div *ngIf="!editStudent[element.id]">
+            {{element.name}} 
           </div>
-          <div  class="errors" *ngIf="editStudent[element.id].name?.invalid && (editStudent[element.id].name?.dirty || editStudent[element.id].name?.touched) && editStudent[element.id].name?.errors?.['required']">
-            Name is required
-          </div>
-          <mat-form-field class="fields">
-            <mat-label>Name</mat-label>
-            <input [formControl]="editStudent[element.id].name"  matInput>
-          </mat-form-field>
-        </div>
-        
-      </td>
-    </ng-container>
   
-    <!-- Weight Column -->
-    <ng-container matColumnDef="dob">
-      <th mat-header-cell *matHeaderCellDef> DOB </th>
-      <td mat-cell *matCellDef="let element">
-        <div *ngIf="!editStudent[element.id]">
-          {{element.dob |  date: 'dd/MM/y'  }} 
-        </div>
-
-        <div *ngIf="editStudent[element.id]">
-          <div class="errors" *ngIf="!editStudent[element.id].dob?.errors?.['required'] && editStudent[element.id].dob?.errors">
-            Please enter a valid DOB
+          <div *ngIf="editStudent[element.id]">
+            <div class="errors" *ngIf="!editStudent[element.id].name.errors?.['required'] && editStudent[element.id].name?.errors">
+              Please enter a valid Name
+            </div>
+            <div  class="errors" *ngIf="editStudent[element.id].name?.invalid && (editStudent[element.id].name?.dirty || editStudent[element.id].name?.touched) && editStudent[element.id].name?.errors?.['required']">
+              Name is required
+            </div>
+            <mat-form-field class="fields">
+              <mat-label>Name</mat-label>
+              <input [formControl]="editStudent[element.id].name"  matInput>
+            </mat-form-field>
           </div>
-          <div  class="errors" *ngIf="editStudent[element.id].dob?.invalid && (editStudent[element.id].dob?.dirty || editStudent[element.id].dob?.touched) && editStudent[element.id].dob?.errors?.['required']">
-            DOB is required
+          
+        </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef> DOB </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="!editStudent[element.id]">
+            {{element.dob |  date: 'dd/MM/y'  }} 
           </div>
-
-          <mat-form-field class="fields">
-            <mat-label>DOB</mat-label>
-            <input matInput [formControl]="editStudent[element.id].dob"  [matDatepicker]="picker">
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-
-
-      </td>
-    </ng-container>
   
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="score">
-      <th mat-header-cell *matHeaderCellDef> Score </th>
-      <td mat-cell *matCellDef="let element"> 
-        <div *ngIf="!editStudent[element.id]">
-          {{element.score}} 
-        </div>
-
-        <div *ngIf="editStudent[element.id]">
-          <div class="errors" *ngIf="!editStudent[element.id].score?.errors?.['required'] && editStudent[element.id].score?.errors">
-            Please enter a valid Score
-          </div>
-          <div  class="errors" *ngIf="editStudent[element.id].score?.invalid && (editStudent[element.id].score?.dirty || editStudent[element.id].score?.touched) && editStudent[element.id].score?.errors?.['required']">
-            Score is required
-          </div>
-
-          <mat-form-field class="fields">
-            <mat-label>Score</mat-label>
-            <input [formControl]="editStudent[element.id].score"  type="number" matInput>
-          </mat-form-field>
-        </div>
-      </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element"> 
-
-        <div *ngIf="!editStudent[element.id]">
-          <mat-icon (click)="addEdit(element.id,true,element)" fontIcon="mode_edit"> </mat-icon>
-          <mat-icon (click)="deleteStudent(element.id)" fontIcon="delete"> </mat-icon>
-        </div>
-
-        <div *ngIf="editStudent[element.id]">
-          <mat-icon (click)="saveStudent(element.id)" fontIcon="done"> </mat-icon>
-          <mat-icon (click)="addEdit(element.id,false,element)" fontIcon="edit_off"> </mat-icon>
-        </div>
-
-      </td>
-    </ng-container>
+          <div *ngIf="editStudent[element.id]">
+            <div class="errors" *ngIf="!editStudent[element.id].dob?.errors?.['required'] && editStudent[element.id].dob?.errors">
+              Please enter a valid DOB
+            </div>
+            <div  class="errors" *ngIf="editStudent[element.id].dob?.invalid && (editStudent[element.id].dob?.dirty || editStudent[element.id].dob?.touched) && editStudent[element.id].dob?.errors?.['required']">
+              DOB is required
+            </div>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+            <mat-form-field class="fields">
+              <mat-label>DOB</mat-label>
+              <input matInput [formControl]="editStudent[element.id].dob"  [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+  
+        </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let element"> 
+          <div *ngIf="!editStudent[element.id]">
+            {{element.score}} 
+          </div>
+  
+          <div *ngIf="editStudent[element.id]">
+            <div class="errors" *ngIf="!editStudent[element.id].score?.errors?.['required'] && editStudent[element.id].score?.errors">
+              Please enter a valid Score
+            </div>
+            <div  class="errors" *ngIf="editStudent[element.id].score?.invalid && (editStudent[element.id].score?.dirty || editStudent[element.id].score?.touched) && editStudent[element.id].score?.errors?.['required']">
+              Score is required
+            </div>
+  
+            <mat-form-field class="fields">
+              <mat-label>Score</mat-label>
+              <input [formControl]="editStudent[element.id].score"  type="number" matInput>
+            </mat-form-field>
+          </div>
+        </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> 
+  
+          <div *ngIf="!editStudent[element.id]">
+            <mat-icon (click)="addEdit(element.id,true,element)" fontIcon="mode_edit"> </mat-icon>
+            <mat-icon (click)="deleteStudent(element.id)" fontIcon="delete"> </mat-icon>
+          </div>
+  
+          <div *ngIf="editStudent[element.id]">
+            <mat-icon (click)="saveStudent(element.id)" fontIcon="done"> </mat-icon>
+            <mat-icon (click)="addEdit(element.id,false,element)" fontIcon="edit_off"> </mat-icon>
+          </div>
+  
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="handlePageEvent($event)"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+  
+  
+ 
 </div>
-
-
-<mat-paginator [length]="100"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              (page)="handlePageEvent($event)"
-              aria-label="Select page">
-</mat-paginator>

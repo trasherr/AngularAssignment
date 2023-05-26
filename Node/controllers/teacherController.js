@@ -21,7 +21,8 @@ export const getAllStudents = async (req,res) => {
     req.query.size = req.query.size ? Number(req.query.size) : 10;
     const offset = req.query.page * req.query.size 
     const data = await Student.findAll({ where:{ teacherId: req.body.identity }, limit: req.query.size, offset: offset });
-    res.send(data);
+    const count = await Student.count({ where:{ teacherId: req.body.identity } });
+    res.send({ students: data, count: count });
 }
 
 export const CreateStudentRecord = async (req,res) => {
@@ -35,14 +36,11 @@ export const CreateStudentRecord = async (req,res) => {
             score: req.body.score,
             teacherId: req.body.identity,
             dob: new Date(req.body.dob)
-        }).then((student) => {
-            res.send()
-        }).catch(err => {
-            res.status(500).send()
         })
+        .then((student) => res.send())
+        .catch(err => res.status(500).send());
     }
-    else
-        res.status(409).send();
+    else res.status(409).send();
 }
 
 

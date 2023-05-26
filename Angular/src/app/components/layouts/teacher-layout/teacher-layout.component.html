@@ -1,16 +1,11 @@
 <p>
-    <mat-toolbar>
+    <mat-toolbar class="primary">
      <button mat-icon-button class="example-icon" (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
     <span>Dashboard</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-     <mat-icon>share</mat-icon>
-   </button>
+
 
    <button mat-icon-button (click)="logout()" class="example-icon" aria-label="logout">
     <mat-icon>logout</mat-icon>
@@ -19,7 +14,7 @@
 </p>
 
 <mat-drawer-container class="teacher-container" hasBackdrop="false">
-  <mat-drawer class="side-bar-border" #drawer mode="over" >
+  <mat-drawer class="side-bar-border" opened="true" #drawer mode="push" >
 
     <div class="side-bar justify-content-center">
 
@@ -28,19 +23,20 @@
       </div>
 
       
-      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher' ?  'selected' : ''  }}" routerLink="/teacher" >
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher' ?  'selected' : ''  }} option" routerLink="/teacher" >
         Student List 
       </div>
 
-      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/add-student' ?  'selected' : ''  }}" routerLink="/teacher/add-student">
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/add-student' ?  'selected' : ''  }} option" routerLink="/teacher/add-student">
         Add Record 
       </div>
 
-      <div class="side-bar-card text-center lh-lg " routerLink="/logout">
-        
-          
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/profile' ?  'selected' : ''  }} option" routerLink="/teacher/profile">
+        Profile
+      </div>
+
+      <div class="side-bar-card text-center lh-lg option" routerLink="/logout">
             <mat-icon>logout</mat-icon> 
-          
           Logout
       </div>
 

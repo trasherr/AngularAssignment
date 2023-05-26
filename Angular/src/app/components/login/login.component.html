@@ -16,36 +16,34 @@
               <form [formGroup]="studentLoginForm" (ngSubmit)="studentLogin()" >
     
                 <div class="form-container">
-                  
-    
-                  <span class="errors" *ngIf="!studentLoginForm.get('rollNo')?.errors?.['required'] && studentLoginForm.get('rollNo')?.errors">
-                    Please enter a valid Roll no
-                  </span>
-                  <span  class="errors" *ngIf="studentLoginForm.get('rollNo')?.invalid && (studentLoginForm.get('rollNo')?.dirty || studentLoginForm.get('rollNo')?.touched) && studentLoginForm.get('rollNo')?.errors?.['required']">
-                    Roll no is required
-                  </span>
-                   
                   <mat-form-field >
                     <mat-label>
                       Roll No
                     </mat-label>
                     <input type="number" formControlName="rollNo"  matInput >
+                    <mat-hint class="errors" *ngIf="!studentLoginForm.get('rollNo')?.errors?.['required'] && studentLoginForm.get('rollNo')?.errors">
+                      Please enter a valid Roll no
+                    </mat-hint>
+                    <mat-hint class="errors" *ngIf="studentLoginForm.get('rollNo')?.invalid && (studentLoginForm.get('rollNo')?.dirty || studentLoginForm.get('rollNo')?.touched) && studentLoginForm.get('rollNo')?.errors?.['required']">
+                      Roll no is required
+                    </mat-hint>
                   </mat-form-field>
                   
       
                 
     
-                  <span class="errors" *ngIf="!studentLoginForm.get('dob')?.errors?.['required'] && studentLoginForm.get('dob')?.errors">
-                    Please enter a valid DOB
-                  </span>
-                  <span  class="errors" *ngIf="studentLoginForm.get('dob')?.invalid && (studentLoginForm.get('dob')?.dirty || studentLoginForm.get('dob')?.touched) && studentLoginForm.get('dob')?.errors?.['required']">
-                    DOB is required
-                  </span>
+                 
     
                   <mat-form-field >
                     <mat-label>DOB</mat-label>
                     <input matInput formControlName="dob" [matDatepicker]="picker">
-                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-hint style="color: darkgray;">MM/DD/YYYY</mat-hint>
+                      <mat-hint class="errors" *ngIf="!studentLoginForm.get('dob')?.errors?.['required'] && studentLoginForm.get('dob')?.errors">
+                        Please enter a valid DOB
+                      </mat-hint>
+                      <mat-hint class="errors" *ngIf="studentLoginForm.get('dob')?.invalid && (studentLoginForm.get('dob')?.dirty || studentLoginForm.get('dob')?.touched) && studentLoginForm.get('dob')?.errors?.['required']">
+                        DOB is required
+                      </mat-hint>
                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
@@ -77,28 +75,28 @@
     
                 <div class="form-container">
                  
-                    
-                  <span class="errors" *ngIf="!teacherLoginForm.get('email')?.errors?.['required'] && teacherLoginForm.get('email')?.errors">
-                    Please enter a valid email address
-                  </span>
-                  <span class="errors" *ngIf="teacherLoginForm.get('email')?.invalid && (teacherLoginForm.get('email')?.dirty || teacherLoginForm.get('email')?.touched) && teacherLoginForm.get('email')?.errors?.['required']">
-                    Email is required
-                  </span>
                   <mat-form-field >
                     <mat-label>Email</mat-label>
                     <input formControlName="email" matInput >
+                    
+                    <mat-hint class="errors" *ngIf="!teacherLoginForm.get('email')?.errors?.['required'] && teacherLoginForm.get('email')?.errors">
+                      Please enter a valid email address
+                    </mat-hint>
+                    <mat-hint class="errors" *ngIf="teacherLoginForm.get('email')?.invalid && (teacherLoginForm.get('email')?.dirty || teacherLoginForm.get('email')?.touched) && teacherLoginForm.get('email')?.errors?.['required']">
+                      Email is required
+                    </mat-hint>
                   </mat-form-field>
                 
-                  <span class="errors" *ngIf="!teacherLoginForm.get('password')?.errors?.['required'] && teacherLoginForm.get('password')?.errors">
-                    Please enter a valid password
-                  </span>
-                  <span class="errors" *ngIf="teacherLoginForm.get('password')?.invalid && (teacherLoginForm.get('password')?.dirty || teacherLoginForm.get('password')?.touched) && teacherLoginForm.get('password')?.errors?.['required']">
-                    Password is required
-                  </span>
                   
                   <mat-form-field >
                     <mat-label>Password</mat-label>
                     <input  formControlName="password" type="password" matInput>
+                    <mat-hint class="errors" *ngIf="!teacherLoginForm.get('password')?.errors?.['required'] && teacherLoginForm.get('password')?.errors">
+                      Please enter a valid password
+                    </mat-hint>
+                    <mat-hint class="errors" *ngIf="teacherLoginForm.get('password')?.invalid && (teacherLoginForm.get('password')?.dirty || teacherLoginForm.get('password')?.touched) && teacherLoginForm.get('password')?.errors?.['required']">
+                      Password is required
+                    </mat-hint>
                   </mat-form-field>
   
                     <button  [disabled]="!teacherLoginForm.valid" mat-raised-button color="primary">

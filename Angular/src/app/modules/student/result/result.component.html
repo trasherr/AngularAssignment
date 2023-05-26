@@ -1,21 +1,25 @@
 <mat-card>
-    <img mat-card-image src="./assets/images/students.png">
+
+    
 
     <mat-card-content>
         <mat-grid-list cols="12">
-            <mat-grid-tile colspan="12">
-                <mat-card-header>{{ student?.name }}</mat-card-header>
-            </mat-grid-tile>
+            <mat-grid-tile colspan="12"> <h1>Result</h1></mat-grid-tile>
+
+            <mat-grid-tile colspan="6" rowspan="4"><img mat-card-image class="justify-content-center" src="./assets/images/students.png"></mat-grid-tile>
+
+          
+            <mat-grid-tile colspan="6"> <mat-card-header> {{ student?.name}} </mat-card-header> </mat-grid-tile>
             
 
-            <mat-grid-tile colspan="1">Roll No</mat-grid-tile>
-            <mat-grid-tile colspan="11">{{ student?.rollNo }}</mat-grid-tile>
+            <mat-grid-tile colspan="1"> <h2>Roll No</h2> </mat-grid-tile>
+            <mat-grid-tile colspan="5">{{ student?.rollNo }}</mat-grid-tile>
 
-            <mat-grid-tile colspan="1">DOB</mat-grid-tile>
-            <mat-grid-tile colspan="11">{{ student?.dob | date : 'dd/MM/y'}}</mat-grid-tile>
+            <mat-grid-tile colspan="1"> <h2> DOB</h2></mat-grid-tile>
+            <mat-grid-tile colspan="5"> {{ student?.dob | date : 'dd/MM/y'}}</mat-grid-tile>
 
-            <mat-grid-tile colspan="1">Score</mat-grid-tile>
-            <mat-grid-tile colspan="11">{{ student?.score }}</mat-grid-tile>
+            <mat-grid-tile colspan="1"> <h2> Score</h2></mat-grid-tile>
+            <mat-grid-tile colspan="5">{{ student?.score }}</mat-grid-tile>
         </mat-grid-list>
         
         

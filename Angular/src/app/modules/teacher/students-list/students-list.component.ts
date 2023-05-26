@@ -7,6 +7,11 @@ import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
 
+interface IStudentTable{
+  students: IStudent[],
+  count: number
+}
+
 @Component({
   selector: 'app-students-list',
   templateUrl: './students-list.component.html',
@@ -18,6 +23,9 @@ export class StudentsListComponent implements OnInit  {
   displayedColumns = [  'rollNo','name', 'dob', 'score', "action"]
   pageSize = 10;
   pageIndex = 0;
+
+
+  totalCount = 0;
 
   TOKEN = localStorage.getItem("TOKEN");
   HEADERS = new HttpHeaders().set('Content-Type', 'application/json').append("authentication", this.TOKEN ? this.TOKEN : ""  );
@@ -43,10 +51,11 @@ export class StudentsListComponent implements OnInit  {
 
     this.loaderService.load(true);
 
-    this.http.get<IStudent[]>(environment.BASE_URL+`/teacher/getAllStudents?page=${this.pageIndex}&size=${this.pageSize}`, {
+    this.http.get<IStudentTable>(environment.BASE_URL+`/teacher/getAllStudents?page=${this.pageIndex}&size=${this.pageSize}`, {
       headers: this.HEADERS
     }).subscribe(result => {
-      this.students = result;
+      this.students = result.students;
+      this.totalCount = result.count;
       this.loaderService.load(false);
 
     },
