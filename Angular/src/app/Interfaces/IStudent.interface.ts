@@ -1,3 +1,5 @@
+import { ITeacher } from "./ITeacher.interface";
+
 export interface IStudent {
     id: number | undefined,
    
@@ -6,6 +8,6 @@ export interface IStudent {
     dob: Date,
     score: number,
     teacherId: number | undefined,
-    teacher: any | undefined
+    Teacher: ITeacher | undefined
     
 }

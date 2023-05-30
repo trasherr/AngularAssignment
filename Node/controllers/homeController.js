@@ -7,29 +7,13 @@ export const Index = (req,res) => {
     res.send({context: "Home"});
 }
 
-export const register = async (req,res) => {
-    try{
-        let password = await bcrypt.hash(req.body.password,10)
-        await Teacher.create({ 
-            firstName: req.body.firstName, 
-            lastName: req.body.lastName, 
-            email: req.body.email,
-            password: password
-        });
-        
-        res.send();
-        
-    }
-    catch(err){
-        console.log(err);
-        res.status(409).send();
-    }
-}
-
-
 export const teacherLogin = async (req,res) => {
     
     const data = await Teacher.scope('withPassword').findOne({ where: { email: req.body.email }, raw: true });
+    if(!data) {
+        res.status(419).send();
+        return ;
+    }
     const compare = await bcrypt.compare(req.body.password, data.password);
     console.log(process.env.ACCESS_TOKEN);
     if(compare){

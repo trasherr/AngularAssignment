@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { StudentLayoutComponent } from './components/layouts/student-layout/student-layout.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TeacherGuardGuard } from './guards/teacher-guard/teacher-guard.guard';
+import { StudentGuardGuard } from './guards/student-guard/student-guard.guard';
 
 const routes: Routes = [
 
@@ -20,7 +21,9 @@ const routes: Routes = [
 
   { path:'student', component: StudentLayoutComponent, children:[
     { path: "",  loadChildren: () => import("./modules/student/student.module").then(m => m.StudentModule) }
-  ]},
+    ],
+    canActivate: [ StudentGuardGuard ] 
+  },
 ];
 
 @NgModule({

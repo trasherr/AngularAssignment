@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IStudent } from 'src/app/Interfaces/IStudent.interface';
+import { ApiService } from 'src/app/services/api-service/api.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -15,24 +16,23 @@ export class ResultComponent implements OnInit {
   HEADERS = new HttpHeaders().set('Content-Type', 'application/json').append("authentication", this.TOKEN ? this.TOKEN : ""  );
   student: IStudent | undefined;
 
-  constructor(private http: HttpClient, private loaderService: LoaderService) { }
+  constructor(private api: ApiService, private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.loaderService.load(true);
 
-    this.http.get<IStudent>(environment.BASE_URL+`/student/getStudent`, {
-      headers: this.HEADERS
-    }).subscribe(result => {
-      this.student = result;
-      this.loaderService.load(false);
+    // no need to un subscribe
+    const req = this.api.get<IStudent>(environment.BASE_URL+'/student/getStudent', { headers: this.HEADERS });
 
-    },
-    (error: HttpErrorResponse) => {
+    try{
+      req.subscribe((res) => {
+        this.student = res;
+      });
+    }
+    finally{
       this.loaderService.load(false);
-      if(error.status == 419){
-        console.log("authentication failed");
-      }
-    });
+    }
+    
   }
 
 }

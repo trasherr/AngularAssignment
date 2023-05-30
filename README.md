@@ -1,5 +1,7 @@
 # AngularAssignment
 
+
+
 ## Backend
 
 Step 1: Install all node modules
@@ -7,7 +9,7 @@ Step 1: Install all node modules
 npm i
 ```
  
-Step 2: create .env file inside node folder with following parameters (change values based on you environment) 
+Step 2: create .env file inside 'Node' folder with following parameters (change values based on you environment) 
 ```shell
 APP_PORT=5555 
 ACCESS_TOKEN=yYeeNFhgktsFmtRCtKS3 
@@ -26,3 +28,9 @@ npx sequelize-cli db:seed:all
 ```
 
 Backend is Ready !!! 
+
+### Default Credentials
+```shell
+email: teacher@gmail.com
+password: 12345678
+```

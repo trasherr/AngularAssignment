@@ -1,11 +1,13 @@
 import express  from "express";
-import { CreateStudentRecord, destroyStudentRecord, getAllStudents, updateProfile, updateStudentRecord } from "../controllers/teacherController.js";
+import { CreateStudentRecord, addTeacher, changePassword, destroyStudentRecord, get, getAllStudents, updateStudentRecord } from "../controllers/teacherController.js";
 
 const TeacherRoute = express.Router();
 
 TeacherRoute.get('/getAllStudents', getAllStudents );
-TeacherRoute.put('/updateProfile', updateProfile );
+TeacherRoute.get('/get', get );
+TeacherRoute.put('/changePassword', changePassword );
 TeacherRoute.post('/CreateStudentRecord', CreateStudentRecord );
+TeacherRoute.post('/CreateTeacherAccount', addTeacher );
 TeacherRoute.delete('/destroyStudentRecord/:studentId', destroyStudentRecord );
 TeacherRoute.put('/updateStudentRecord/:studentId', updateStudentRecord );
 

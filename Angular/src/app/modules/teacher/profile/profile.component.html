@@ -1,1 +1,72 @@
-<p>profile works!</p>
+<mat-card>
+
+    
+
+    <mat-card-content>
+        <mat-grid-list cols="12">
+            <mat-grid-tile colspan="12"> <h1>Result</h1></mat-grid-tile>
+
+            <mat-grid-tile colspan="6" rowspan="5"><img mat-card-image class="justify-content-center" src="./assets/images/students.png"></mat-grid-tile>
+
+          
+            <mat-grid-tile colspan="6"> <mat-card-header> <h2>{{ teacher?.firstName + " " + teacher?.lastName}} </h2></mat-card-header> </mat-grid-tile>
+            
+
+            <mat-grid-tile colspan="6"> 
+                <div class="fields">
+                
+                    <div class="errors" *ngIf="!password?.errors?.['required'] && password?.errors">
+                        Password must contain atleast 8 and maximum 16 characters
+                      </div>
+                      <div  class="errors" *ngIf="password?.invalid && (password?.dirty || password?.touched) && password?.errors?.['required']">
+                        Password is required
+                      </div>
+    
+                    <mat-form-field class="fields">
+                      <mat-label>Current Password</mat-label>
+                      <input [formControl]="password" type="password" matInput>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="6"> 
+                <div class="fields">
+                
+                    <div class="errors" *ngIf="!newPassword?.errors?.['required'] && newPassword?.errors">
+                        Password must contain atleast 8 and maximum 16 characters
+                      </div>
+                      <div  class="errors" *ngIf="newPassword?.invalid && (newPassword?.dirty || newPassword?.touched) && newPassword?.errors?.['required']">
+                        Password is required
+                      </div>
+    
+                    <mat-form-field class="fields">
+                      <mat-label>New Password</mat-label>
+                      <input [formControl]="newPassword" type="password" matInput>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile> <mat-grid-tile colspan="6"> 
+                <div class="fields">
+                
+                    <div class="errors" *ngIf=" newPassword?.value != cPassword?.value && (cPassword?.dirty || cPassword?.touched)">
+                        Password didn't match
+                      </div>
+                    <mat-form-field class="fields">
+                      <mat-label>Confirm Password</mat-label>
+                      <input [formControl]="cPassword" type="password" matInput>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile> <mat-grid-tile colspan="6"> 
+                <button [disabled]="!(password.valid && newPassword.valid && newPassword?.value == cPassword?.value)" (click)="changePass()" mat-raised-button color="primary">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="playlist_add"> </mat-icon>Change Password
+               </button>
+                
+            </mat-grid-tile>
+           
+
+        </mat-grid-list>
+        
+        
+        
+    </mat-card-content>
+</mat-card>
+

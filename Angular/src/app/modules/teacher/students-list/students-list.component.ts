@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { IStudent } from 'src/app/Interfaces/IStudent.interface';
+import { ApiService } from 'src/app/services/api-service/api.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
@@ -20,7 +21,7 @@ interface IStudentTable{
 export class StudentsListComponent implements OnInit  {
 
   students: IStudent[] = []
-  displayedColumns = [  'rollNo','name', 'dob', 'score', "action"]
+  displayedColumns = [  'rollNo','name', 'dob', 'score', "createdBy", "action"]
   pageSize = 10;
   pageIndex = 0;
 
@@ -34,7 +35,7 @@ export class StudentsListComponent implements OnInit  {
 
   editStudent : any[] = []
 
-  constructor(private http: HttpClient, private loaderService: LoaderService){ }
+  constructor(private api: ApiService, private loaderService: LoaderService){ }
 
 
   ngOnInit(): void {
@@ -51,20 +52,18 @@ export class StudentsListComponent implements OnInit  {
 
     this.loaderService.load(true);
 
-    this.http.get<IStudentTable>(environment.BASE_URL+`/teacher/getAllStudents?page=${this.pageIndex}&size=${this.pageSize}`, {
-      headers: this.HEADERS
-    }).subscribe(result => {
-      this.students = result.students;
-      this.totalCount = result.count;
-      this.loaderService.load(false);
+    const req = this.api.get<IStudentTable>(environment.BASE_URL+`/teacher/getAllStudents?page=${this.pageIndex}&size=${this.pageSize}`, { headers: this.HEADERS });
 
-    },
-    (error: HttpErrorResponse) => {
+    try{
+      req.subscribe((res) => {
+        this.students = res.students;
+        this.totalCount = res.count;
+        this.loaderService.load(false);
+      });
+    }
+    finally{
       this.loaderService.load(false);
-      if(error.status == 419){
-        console.log("authentication failed");
-      }
-    });
+    }
   }
 
 
@@ -107,18 +106,16 @@ export class StudentsListComponent implements OnInit  {
 
     this.loaderService.load(true);
 
-    this.http.put(environment.BASE_URL+`/teacher/updateStudentRecord/${student.id}`, JSON.stringify(student), {
-      headers: this.HEADERS
-    }).subscribe(result => {
+    const req = this.api.put<IStudent>(environment.BASE_URL+`/teacher/updateStudentRecord/${student.id}`, { headers: this.HEADERS }, JSON.stringify(student));
+
+    try{
+      req.subscribe((res) => {
+        Swal.fire('Success', 'Student Record Updated', 'success');
+      });
+    }
+    finally{
       this.loaderService.load(false);
-      Swal.fire('Success', 'Student Record Updated', 'success');
-    },
-    (error: HttpErrorResponse) => {
-      this.loaderService.load(false);
-      if(error.status == 419){
-        console.log("authentication failed");
-      }
-    });
+    }
 
   }
 
@@ -126,20 +123,17 @@ export class StudentsListComponent implements OnInit  {
 
     this.loaderService.load(true);
 
-    this.http.delete(environment.BASE_URL+`/teacher/destroyStudentRecord/${id}`, {
-      headers: this.HEADERS
-    }).subscribe(result => {
-      this.loaderService.load(false);
-      Swal.fire('Success', 'Student Record Deleted', 'success');
-      this.students = this.students.filter(item => item.id != id);
+    const req = this.api.delete(environment.BASE_URL+`/teacher/destroyStudentRecord/${id}`, { headers: this.HEADERS });
 
-    },
-    (error: HttpErrorResponse) => {
+    try{
+      req.subscribe((res) => {
+        Swal.fire('Success', 'Student Record Deleted', 'success');
+        this.students = this.students.filter(item => item.id != id);
+      });
+    }
+    finally{
       this.loaderService.load(false);
-      if(error.status == 419){
-        console.log("authentication failed");
-      }
-    });
+    }
 
   }
 

@@ -22,17 +22,21 @@
         <img src="./assets/images/logo.svg" alt="logo" class="side-bar-logo"> <span class="side-bar-heading"> Angular</span>
       </div>
 
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/profile' ?  'selected' : ''  }} option" routerLink="/teacher/profile">
+        Profile
+      </div>
+      
+      
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/add-student' ?  'selected' : ''  }} option" routerLink="/teacher/add-student">
+        Add Record 
+      </div>
       
       <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher' ?  'selected' : ''  }} option" routerLink="/teacher" >
         Student List 
       </div>
 
-      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/add-student' ?  'selected' : ''  }} option" routerLink="/teacher/add-student">
-        Add Record 
-      </div>
-
-      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/profile' ?  'selected' : ''  }} option" routerLink="/teacher/profile">
-        Profile
+      <div class="side-bar-card text-center lh-lg {{ router.url == '/teacher/create' ?  'selected' : ''  }} option" routerLink="/teacher/create">
+        Create Account
       </div>
 
       <div class="side-bar-card text-center lh-lg option" routerLink="/logout">

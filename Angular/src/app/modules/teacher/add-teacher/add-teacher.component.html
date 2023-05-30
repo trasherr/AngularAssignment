@@ -1,0 +1,84 @@
+<mat-spinner *ngIf="isSubmitted" class="spinner"></mat-spinner>
+
+<mat-grid-list rowHeight="90vh"  cols="12">
+    <mat-grid-tile rowspan="1" colspan="8">
+        <img class="form-img" src="./assets/images/register-ai.png" alt="" srcset="">
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="1" colspan="4" >
+        <form #form="ngForm" [formGroup]="addRecordForm" (ngSubmit)="addRecord()" class="fields">
+            <div class="fields">
+                
+                <div class="errors" *ngIf="!addRecordForm.get('first_name')?.errors?.['required'] && addRecordForm.get('first_name')?.errors">
+                    Please enter a valid first name
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('first_name')?.invalid && (addRecordForm.get('first_name')?.dirty || addRecordForm.get('first_name')?.touched) && addRecordForm.get('first_name')?.errors?.['required']">
+                    First Name is required
+                  </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>First Name</mat-label>
+                  <input formControlName="first_name" matInput>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <div class="errors" *ngIf="!addRecordForm.get('last_name')?.errors?.['required'] && addRecordForm.get('last_name')?.errors">
+                    Please enter a valid last name
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('last_name')?.invalid && (addRecordForm.get('last_name')?.dirty || addRecordForm.get('last_name')?.touched) && addRecordForm.get('last_name')?.errors?.['required']">
+                    Last Name is required
+                  </div>
+                <mat-form-field class="fields">
+                  <mat-label>Last Name</mat-label>
+                  <input formControlName="last_name" matInput>
+                </mat-form-field>
+            </div>
+
+            <div>
+
+                <div class="errors" *ngIf="!addRecordForm.get('email')?.errors?.['required'] && addRecordForm.get('email')?.errors">
+                  Please enter a valid email
+                </div>
+                <div  class="errors" *ngIf="addRecordForm.get('email')?.invalid && (addRecordForm.get('email')?.dirty || addRecordForm.get('email')?.touched) && addRecordForm.get('email')?.errors?.['required']">
+                  Email is required
+                </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" >
+                </mat-form-field>
+             
+              
+            </div>
+
+            <div>
+                <div class="errors" *ngIf="!addRecordForm.get('password')?.errors?.['required'] && addRecordForm.get('password')?.errors">
+                    Password must contain atleast 8 and maximum 16 characters
+                  </div>
+                  <div  class="errors" *ngIf="addRecordForm.get('password')?.invalid && (addRecordForm.get('password')?.dirty || addRecordForm.get('password')?.touched) && addRecordForm.get('password')?.errors?.['required']">
+                    Password is required
+                  </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>Password</mat-label>
+                  <input formControlName="password" type="password" matInput>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <div class="errors" *ngIf="addRecordForm.get('confirm_password')?.value != addRecordForm.get('password')?.value && (addRecordForm.get('confirm_password')?.dirty || addRecordForm.get('confirm_password')?.touched)">
+                   Password didn't match
+                  </div>
+
+                <mat-form-field class="fields">
+                  <mat-label>Confirm Password</mat-label>
+                  <input formControlName="confirm_password" type="password" matInput>
+                </mat-form-field>
+            </div>
+
+            <button [disabled]="!(addRecordForm.valid && addRecordForm.get('confirm_password')?.value == addRecordForm.get('password')?.value) || isSubmitted"  mat-raised-button color="primary">
+                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="playlist_add"> </mat-icon>Create Account
+            </button>
+        </form>
+    </mat-grid-tile>
+  </mat-grid-list>

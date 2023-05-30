@@ -7,6 +7,7 @@ import { StudentsListComponent } from './students-list/students-list.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
   
     StudentsListComponent,
        AddStudentComponent,
-       ProfileComponent
+       ProfileComponent,
+       AddTeacherComponent
   ],
   imports: [
     CommonModule,
